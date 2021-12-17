@@ -23,11 +23,5 @@ public class AnimToggleValue : MonoBehaviour
     private void Update() {
         currentValue = Mathf.Lerp(currentValue, destValue, Time.deltaTime * speed);
         animator.SetFloat(animeValue, Mathf.Round(currentValue * 10) / 10);
-
-        //Debug lines
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ToggleValue();
-        }
     }
 }
