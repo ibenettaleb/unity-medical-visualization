@@ -194,6 +194,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 5216508820295063757, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
+      propertyPath: m_Center.x
+      value: 2.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478047555842794134, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 859663451}
+    - target: {fileID: 6478047555842794134, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextItem
+      objectReference: {fileID: 0}
     - target: {fileID: 7068427624584191944, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.567
@@ -957,5 +969,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6478047555842794134, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 859663451}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80ed74317806242e89662680f79cc1c6, type: 3}
