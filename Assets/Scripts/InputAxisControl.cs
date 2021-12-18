@@ -25,16 +25,13 @@ public class InputAxisControl : MonoBehaviour
 
     float GetAxisCustom(string Axis) {
         if (Axis.Equals("Horizontal")) {
-            if (EventSystem.current.currentSelectedGameObject != null) {
-                return 0;
-            }
             #if UNITY_EDITOR || UNITY_STANDALONE
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
                 return Input.GetAxis("Mouse X");
             }
             #endif
             #if UNITY_IOS || UNITY_ANDROID
-            if (Input.touchCount > 0) {
+            if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) {
                 return Input.GetTouch(0).deltaPosition.x;
             }
             #endif
@@ -42,16 +39,13 @@ public class InputAxisControl : MonoBehaviour
         }
 
         if (Axis.Equals("Vertical")) {
-            if (EventSystem.current.currentSelectedGameObject != null) {
-                return 0;
-            }
             #if UNITY_EDITOR || UNITY_STANDALONE
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
                 return Input.GetAxis("Mouse Y");
             }
             #endif
             #if UNITY_IOS || UNITY_ANDROID
-            if (Input.touchCount > 0) {
+            if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) {
                 return Input.GetTouch(0).deltaPosition.y;
             }
             #endif
