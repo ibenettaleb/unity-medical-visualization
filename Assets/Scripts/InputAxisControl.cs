@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class InputAxisControl : MonoBehaviour
@@ -10,6 +11,8 @@ public class InputAxisControl : MonoBehaviour
     [SerializeField] [Range(-8f, 8f)] private float zoomRange = 0f;
     [SerializeField] private float mouseWheelSpeed = 2f;
     [SerializeField] private float zoomDampSpeed = 2f;
+
+    [SerializeField] private Slider zoomSlider = null;
 
     private void Awake() {
         m_camera = GetComponent<CinemachineFreeLook>();
@@ -71,7 +74,15 @@ public class InputAxisControl : MonoBehaviour
         zoomRange = Mathf.Clamp(zoomRange, -8f, 8f);
 
         for (int i = 0; i < 3; i++) {
-            m_camera.m_Orbits[i].m_Radius = Mathf.Lerp(m_camera.m_Orbits[i].m_Radius, m_camera.m_Orbits[i].m_Radius + zoomRange, Time.deltaTime * zoomDampSpeed);
+            m_camera.m_Orbits[i].m_Radius = Mathf.Lerp(m_camera.m_Orbits[i].m_Radius, originalOrbit[i].m_Radius + zoomRange, Time.deltaTime * zoomDampSpeed);
+        }
+    }
+
+    public void SetZoom() {
+        zoomRange = zoomSlider.value;
+
+        for (int i = 0; i < 3; i++) {
+            m_camera.m_Orbits[i].m_Radius = Mathf.Lerp(m_camera.m_Orbits[i].m_Radius, originalOrbit[i].m_Radius + zoomRange, Time.deltaTime * zoomDampSpeed);
         }
     }
 }
