@@ -4,8 +4,20 @@ using Cinemachine;
 
 public class InputAxisControl : MonoBehaviour
 {
+    private CinemachineFreeLook m_camera = null;
+    private CinemachineFreeLook.Orbit[] originalOrbit = new CinemachineFreeLook.Orbit[3];
+
+    [SerializeField] [Range(-8f, 8f)] private float zoomRange = 0f;
+    [SerializeField] private float mouseWheelSpeed = 2f;
+    [SerializeField] private float zoomDampSpeed = 2f;
+
     private void Awake() {
+        m_camera = GetComponent<CinemachineFreeLook>();
         CinemachineCore.GetInputAxis = GetAxisCustom;
+
+        for (int i = 0; i < 3; i++) {
+            originalOrbit[i] = m_camera.m_Orbits[i];
+        }
     }
 
     float GetAxisCustom(string Axis) {
@@ -44,5 +56,22 @@ public class InputAxisControl : MonoBehaviour
         }
 
         return 0f;
+    }
+
+    private void Update() {
+        ScaleOrbits();
+    }
+
+    void ScaleOrbits() {
+        if (Mathf.Abs(Input.mouseScrollDelta.y) == 0) {
+            return;
+        }
+
+        zoomRange -= Input.mouseScrollDelta.y * mouseWheelSpeed;
+        zoomRange = Mathf.Clamp(zoomRange, -8f, 8f);
+
+        for (int i = 0; i < 3; i++) {
+            m_camera.m_Orbits[i].m_Radius = Mathf.Lerp(m_camera.m_Orbits[i].m_Radius, m_camera.m_Orbits[i].m_Radius + zoomRange, Time.deltaTime * zoomDampSpeed);
+        }
     }
 }
